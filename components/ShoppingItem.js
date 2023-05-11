@@ -27,7 +27,9 @@ const ShoppingItem = props => {
       handleUpdateItem,
       handleDeleteItem,
     });
-    // setShow(false);
+    setTimeout(() => {
+      setShow(false);
+    }, 500);
   };
 
   return (
