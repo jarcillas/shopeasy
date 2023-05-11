@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     padding: 30,
+    paddingBottom: 0,
   },
   container: {
     flex: 1,
@@ -20,14 +21,12 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
   },
   totalContainer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    position: "absolute",
     bottom: 0,
     width: "100%",
-    paddingHorizontal: 30,
-    paddingVertical: 20,
+    marginTop: 10,
+    marginBottom: 10,
   },
   totalText: {
     flex: 1,
@@ -45,20 +44,33 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  itemInput: {
+  itemInputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginVertical: 15,
+    columnGap: 10,
+  },
+  itemInput: {
+    flex: 1,
     borderBottomColor: "#bebebe",
     borderBottomWidth: 1,
     width: "100%",
     fontSize: 16,
+  },
+  valueInput: {
+    width: 80,
+    borderColor: "#bebebe",
+    borderWidth: 1,
+    fontSize: 16,
+    textAlign: "right",
+    paddingHorizontal: 10,
   },
   shoppingItem: {
     width: "100%",
     padding: 10,
   },
   shoppingItemText: {
-    fontStyle: "bold",
-    fontSize: 20,
+    fontSize: 16,
   },
 });
 
