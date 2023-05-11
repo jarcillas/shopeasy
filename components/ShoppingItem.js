@@ -66,6 +66,7 @@ const ShoppingItem = props => {
               onPress={() => {
                 console.log(`Deleting item ${index}`);
                 handleDeleteItem(index);
+                setShow(false);
               }}
             >
               <Text style={[styles.shoppingItemDelete]}>Delete</Text>
