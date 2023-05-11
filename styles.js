@@ -90,6 +90,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     columnGap: 6,
   },
+  shoppingItemDelete: {
+    color: redColor,
+    fontWeight: "bold",
+    fontSize: 16,
+  },
   shoppingItemOdd: {
     backgroundColor: primaryColor,
   },

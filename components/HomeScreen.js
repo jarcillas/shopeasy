@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, View, TextInput, FlatList } from "react-native";
 import styles from "../styles";
+import ShoppingItem from "./ShoppingItem";
 
 function HomeScreen() {
   const [shoppingList, setShoppingList] = useState([]);
@@ -21,6 +22,12 @@ function HomeScreen() {
     console.log("New shopping list:", shoppingList);
     setItemInput("");
     setValueInput("");
+  };
+
+  const handleDeleteItem = idx => {
+    const currentList = [...shoppingList];
+    currentList.splice(idx, 1);
+    setShoppingList(currentList);
   };
 
   const totalValue = shoppingList.reduce((prev, curr) => {
@@ -77,38 +84,12 @@ function HomeScreen() {
           <FlatList
             data={shoppingList}
             renderItem={({ item, index }) => (
-              <View
-                key={index}
-                style={[
-                  styles.shoppingItem,
-                  index % 2 ? styles.shoppingItemEven : styles.shoppingItemOdd,
-                  index === 0 ? styles.shoppingItemFirst : {},
-                  index === shoppingList.length - 1
-                    ? styles.shoppingItemLast
-                    : {},
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.shoppingItemText,
-                    index % 2
-                      ? styles.shoppingItemTextEven
-                      : styles.shoppingItemTextOdd,
-                  ]}
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  style={[
-                    styles.shoppingItemAmount,
-                    index % 2
-                      ? styles.shoppingItemTextEven
-                      : styles.shoppingItemTextOdd,
-                  ]}
-                >
-                  {formatter.format(item.value)}
-                </Text>
-              </View>
+              <ShoppingItem
+                shoppingList={shoppingList || []}
+                handleDeleteItem={handleDeleteItem}
+                item={item}
+                index={index}
+              />
             )}
             style={{ flex: 1 }}
           />
