@@ -3,7 +3,14 @@ import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../styles";
 
 const ShoppingItem = props => {
-  const { shoppingList, item, index, handleDeleteItem } = props;
+  const {
+    shoppingList,
+    item,
+    index,
+    handleDeleteItem,
+    handleUpdateItem,
+    navigation,
+  } = props;
   const [show, setShow] = useState(false);
 
   const formatter = new Intl.NumberFormat("en-US", {
@@ -11,6 +18,17 @@ const ShoppingItem = props => {
     currency: "PHP",
     currencyDisplay: "narrowSymbol",
   });
+
+  const handleNavigate = () => {
+    console.log("navigating to ItemScreen");
+    navigation.push("Item", {
+      item: item,
+      index: index,
+      handleUpdateItem,
+      handleDeleteItem,
+    });
+    // setShow(false);
+  };
 
   return (
     <TouchableOpacity
@@ -30,16 +48,18 @@ const ShoppingItem = props => {
       >
         {show ? (
           <>
-            <Text
-              style={[
-                styles.shoppingItemText,
-                index % 2
-                  ? styles.shoppingItemTextEven
-                  : styles.shoppingItemTextOdd,
-              ]}
-            >
-              Edit Item
-            </Text>
+            <TouchableOpacity onPress={handleNavigate}>
+              <Text
+                style={[
+                  styles.shoppingItemEdit,
+                  index % 2
+                    ? styles.shoppingItemTextEven
+                    : styles.shoppingItemTextOdd,
+                ]}
+              >
+                Edit Item
+              </Text>
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
                 console.log(`Deleting item ${index}`);

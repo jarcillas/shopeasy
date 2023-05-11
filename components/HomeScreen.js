@@ -4,7 +4,7 @@ import { Text, View, TextInput, FlatList } from "react-native";
 import styles from "../styles";
 import ShoppingItem from "./ShoppingItem";
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   const [shoppingList, setShoppingList] = useState([]);
   const [itemInput, setItemInput] = useState("");
   const [valueInput, setValueInput] = useState("");
@@ -22,6 +22,12 @@ function HomeScreen() {
     console.log("New shopping list:", shoppingList);
     setItemInput("");
     setValueInput("");
+  };
+
+  const handleUpdateItem = (idx, updatedItem) => {
+    const currentList = [...shoppingList];
+    currentList.splice(idx, 1, updatedItem);
+    setShoppingList(currentList);
   };
 
   const handleDeleteItem = idx => {
@@ -89,6 +95,8 @@ function HomeScreen() {
                 handleDeleteItem={handleDeleteItem}
                 item={item}
                 index={index}
+                navigation={navigation}
+                handleUpdateItem={handleUpdateItem}
               />
             )}
             style={{ flex: 1 }}

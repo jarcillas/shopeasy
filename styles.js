@@ -95,6 +95,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  shoppingItemEdit: {
+    fontWeight: "bold",
+    fontSize: 16,
+    // backgroundColor: "blue",
+  },
   shoppingItemOdd: {
     backgroundColor: primaryColor,
   },
