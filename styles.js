@@ -1,18 +1,25 @@
 import { StyleSheet } from "react-native";
 
+const primaryColor = "#003049";
+const secondaryColor = "#fdf0d5";
+const tertiaryColor = "#669bbc";
+const redColor = "#c1121f";
+
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     height: "100%",
     width: "100%",
-    backgroundColor: "#fff",
-    padding: 30,
-    paddingBottom: 0,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    // backgroundColor: "black",
+    // backgroundColor: "#dddddd",
   },
-  container: {
+  innerContainer: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "stretch",
+    backgroundColor: tertiaryColor,
+    paddingHorizontal: 20,
+    paddingBottom: 10,
   },
   listContainer: {
     marginTop: 0,
@@ -25,19 +32,24 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     bottom: 0,
     width: "100%",
-    marginTop: 10,
-    marginBottom: 10,
+    // marginTop: 10,
+    // marginBottom: 10,
+    backgroundColor: primaryColor,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   totalText: {
     flex: 1,
     fontSize: 20,
     fontWeight: "bold",
+    color: secondaryColor,
   },
   totalAmountText: {
     flex: 1,
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "right",
+    color: secondaryColor,
   },
   headline: {
     color: "black",
@@ -52,25 +64,60 @@ const styles = StyleSheet.create({
   },
   itemInput: {
     flex: 1,
-    borderBottomColor: "#bebebe",
-    borderBottomWidth: 1,
+    borderBottomColor: primaryColor,
+    borderBottomWidth: 2,
     width: "100%",
-    fontSize: 16,
+    fontSize: 20,
+    color: primaryColor,
+    fontWeight: "500",
   },
   valueInput: {
-    width: 80,
-    borderColor: "#bebebe",
-    borderWidth: 1,
-    fontSize: 16,
+    width: 100,
+    borderBottomColor: primaryColor,
+    borderBottomWidth: 2,
+    fontSize: 20,
     textAlign: "right",
     paddingHorizontal: 10,
+    color: primaryColor,
+    fontWeight: "500",
   },
   shoppingItem: {
     width: "100%",
-    padding: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    columnGap: 6,
+  },
+  shoppingItemOdd: {
+    backgroundColor: primaryColor,
+  },
+  shoppingItemEven: {
+    backgroundColor: secondaryColor,
+  },
+  shoppingItemFirst: {
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+  },
+  shoppingItemLast: {
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
   },
   shoppingItemText: {
+    flex: 1,
     fontSize: 16,
+  },
+  shoppingItemTextOdd: {
+    color: secondaryColor,
+  },
+  shoppingItemTextEven: {
+    color: primaryColor,
+  },
+  shoppingItemAmount: {
+    fontSize: 16,
+    textAlign: "right",
+    // paddingHorizontal: 10,
   },
 });
 

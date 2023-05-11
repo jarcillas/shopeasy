@@ -13,7 +13,15 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "ShopEasy" }}
+          options={{
+            title: "ShopEasy",
+            headerStyle: {
+              backgroundColor: "#003049",
+            },
+            headerTitleStyle: {
+              color: "#fdf0d5",
+            },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
