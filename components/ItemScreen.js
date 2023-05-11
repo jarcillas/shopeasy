@@ -17,22 +17,26 @@ const ItemScreen = ({ navigation, route }) => {
             setTitleInput(text);
           }}
         />
+      </View>
+      <View style={[styles.footerContainer, styles.buttonContainer]}>
         <TouchableOpacity
+          style={[styles.button, styles.saveButton]}
           onPress={() => {
             const newItem = { ...item, title: titleInput };
             handleUpdateItem(index, newItem);
             navigation.goBack();
           }}
         >
-          <Text>Save</Text>
+          <Text style={styles.buttonText}>SAVE</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={[styles.button, styles.deleteButton]}
           onPress={() => {
             handleDeleteItem(index);
             navigation.goBack();
           }}
         >
-          <Text>Delete</Text>
+          <Text style={styles.buttonText}>DELETE</Text>
         </TouchableOpacity>
       </View>
       <StatusBar style="auto" />

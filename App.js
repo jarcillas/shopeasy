@@ -22,6 +22,7 @@ export default function App() {
             headerTitleStyle: {
               color: "#fdf0d5",
             },
+            headerTintColor: "#fdf0d5",
           }}
         />
         <Stack.Screen
@@ -35,6 +36,7 @@ export default function App() {
             headerTitleStyle: {
               color: "#fdf0d5",
             },
+            headerTintColor: "#fdf0d5",
           }}
         />
       </Stack.Navigator>

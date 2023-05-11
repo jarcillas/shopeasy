@@ -69,7 +69,7 @@ function HomeScreen({ navigation }) {
             style={styles.valueInput}
             value={valueInput}
             ref={valueInputRef}
-            placeholder="amount"
+            placeholder="Amount"
             inputMode="decimal"
             onChangeText={value => {
               setValueInput(value);
@@ -110,7 +110,7 @@ function HomeScreen({ navigation }) {
           </View>
         )}
       </View>
-      <View style={styles.totalContainer}>
+      <View style={[styles.footerContainer, styles.totalContainer]}>
         <Text style={styles.totalText}>Total:</Text>
         <Text style={styles.totalAmountText}>
           {formatter.format(totalValue)}

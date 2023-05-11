@@ -30,13 +30,16 @@ const styles = StyleSheet.create({
   totalContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    bottom: 0,
-    width: "100%",
+    alignItems: "center",
     // marginTop: 10,
     // marginBottom: 10,
+  },
+  footerContainer: {
+    bottom: 0,
+    width: "100%",
+    height: 60,
     backgroundColor: primaryColor,
     paddingHorizontal: 20,
-    paddingVertical: 10,
   },
   totalText: {
     flex: 1,
@@ -128,6 +131,28 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "right",
     // paddingHorizontal: 10,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    columnGap: 20,
+    alignItems: "center",
+  },
+  button: {
+    flex: 1,
+    paddingVertical: 6,
+    borderRadius: 8,
+  },
+  deleteButton: {
+    backgroundColor: redColor,
+  },
+  saveButton: {
+    backgroundColor: tertiaryColor,
+  },
+  buttonText: {
+    textAlign: "center",
+    color: secondaryColor,
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });
 
