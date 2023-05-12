@@ -1,8 +1,28 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, View, TextInput, FlatList } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "../styles";
 import ShoppingItem from "./ShoppingItem";
+
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("@ShopEasy:shoppingList");
+    return jsonValue !== null ? JSON.parse(jsonValue) : [];
+  } catch (e) {
+    // error reading value
+  }
+};
+
+const storeData = async value => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("@ShopEasy:shoppingList", jsonValue);
+    console.log("storing shoppingList to asyncstorage", value);
+  } catch (e) {
+    // saving error
+  }
+};
 
 function HomeScreen({ navigation }) {
   const [shoppingList, setShoppingList] = useState([]);
@@ -12,10 +32,22 @@ function HomeScreen({ navigation }) {
   const valueInputRef = useRef(null);
   const itemInputRef = useRef(null);
 
+  useEffect(() => {
+    getData()
+      .then(res => {
+        console.log("getting values from asyncstorage", res);
+        setShoppingList(res || []);
+      })
+      .catch(e => {
+        console.log("error", e);
+      });
+  }, []);
+
   const handleSubmitItem = item => {
     setShoppingList(list => {
       const currentList = [...list];
       currentList.push(item);
+      storeData(currentList);
       return currentList;
     });
     console.log("Added new item:", item);
@@ -28,12 +60,14 @@ function HomeScreen({ navigation }) {
     const currentList = [...shoppingList];
     currentList.splice(idx, 1, updatedItem);
     setShoppingList(currentList);
+    storeData(currentList);
   };
 
   const handleDeleteItem = idx => {
     const currentList = [...shoppingList];
     currentList.splice(idx, 1);
     setShoppingList(currentList);
+    storeData(currentList);
   };
 
   const totalValue = shoppingList.reduce((prev, curr) => {
