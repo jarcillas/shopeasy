@@ -154,6 +154,34 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
   },
+  titleInputField: {
+    flex: 1,
+    fontSize: 20,
+    fontWeight: "bold",
+    borderBottomColor: primaryColor,
+    borderBottomWidth: 2,
+    marginTop: 10,
+  },
+  inputLabel: {
+    flex: 1,
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  subInputLabel: {
+    marginLeft: 20,
+  },
+  inputField: {
+    width: 100,
+    textAlign: "right",
+    borderBottomColor: primaryColor,
+    borderBottomWidth: 2,
+    fontSize: 18,
+  },
+  rowContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+  },
 });
 
 export default styles;
