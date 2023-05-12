@@ -25,6 +25,7 @@ const ItemScreen = ({ navigation, route }) => {
   const [surchargeInput, setSurchargeInput] = useState(
     formatter.format(item.surcharge),
   );
+  const [noteInput, setNoteInput] = useState(item?.note || "");
 
   return (
     <View style={styles.wrapper}>
@@ -65,7 +66,9 @@ const ItemScreen = ({ navigation, route }) => {
           />
         </View>
         <View style={styles.rowContainer}>
-          <Text style={styles.inputLabel}>Subtotal</Text>
+          <Text style={[styles.inputLabel, styles.bigInputLabel]}>
+            Subtotal
+          </Text>
           <Text style={styles.valueDisplay}>
             {formatter.format(convertValue(valueInput) * Number(qtyInput))}
           </Text>
@@ -97,7 +100,9 @@ const ItemScreen = ({ navigation, route }) => {
           />
         </View>
         <View style={styles.rowContainer}>
-          <Text style={styles.inputLabel}>Net Price</Text>
+          <Text style={[styles.inputLabel, styles.bigInputLabel]}>
+            Net Price
+          </Text>
           <Text style={styles.valueDisplay}>
             {formatter.format(
               convertValue(valueInput) * Number(qtyInput) -
@@ -107,7 +112,19 @@ const ItemScreen = ({ navigation, route }) => {
           </Text>
         </View>
         <View style={styles.columnContainer}>
-          <Text style={styles.inputLabel}>Note</Text>
+          <Text style={[styles.columnInputLabel, styles.bigInputLabel]}>
+            Note
+          </Text>
+          <TextInput
+            style={styles.bigTextField}
+            value={noteInput}
+            multiline={true}
+            numberOfLines={4}
+            textAlignVertical="top"
+            onChangeText={text => {
+              setNoteInput(text);
+            }}
+          />
         </View>
       </View>
       <View style={[styles.footerContainer, styles.buttonContainer]}>
@@ -120,6 +137,7 @@ const ItemScreen = ({ navigation, route }) => {
               value: convertValue(valueInput),
               discount: convertValue(discountInput),
               surcharge: convertValue(surchargeInput),
+              note: noteInput,
             };
             handleUpdateItem(index, newItem);
             navigation.goBack();

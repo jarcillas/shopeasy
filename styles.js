@@ -164,8 +164,14 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     flex: 1,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     fontSize: 18,
+  },
+  columnInputLabel: {
+    fontSize: 18,
+  },
+  bigInputLabel: {
+    fontWeight: "bold",
   },
   subInputLabel: {
     marginLeft: 20,
@@ -189,11 +195,19 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   columnContainer: {
+    flex: 1,
     flexDirection: "column",
+    justifyContent: "flex-start",
     marginTop: 10,
+    width: "100%",
+    rowGap: 10,
   },
   bigTextField: {
     width: "100%",
+    borderRadius: 8,
+    padding: 10,
+    borderColor: primaryColor,
+    borderWidth: 2,
   },
 });
 
