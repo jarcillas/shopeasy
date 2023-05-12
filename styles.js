@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginVertical: 15,
     columnGap: 10,
+    zIndex: 9,
   },
   itemInput: {
     flex: 1,
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: primaryColor,
     fontWeight: "500",
+    backgroundColor: "red",
   },
   valueInput: {
     width: 100,
