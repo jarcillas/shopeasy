@@ -37,7 +37,7 @@ function HomeScreen({ navigation }) {
   };
 
   const totalValue = shoppingList.reduce((prev, curr) => {
-    return prev + Number(curr.value);
+    return prev + curr.value * curr.qty - curr.discount + curr.surcharge;
   }, 0);
 
   const formatter = new Intl.NumberFormat("en-US", {

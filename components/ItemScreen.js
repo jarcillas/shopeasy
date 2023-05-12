@@ -134,6 +134,7 @@ const ItemScreen = ({ navigation, route }) => {
             const newItem = {
               ...item,
               title: titleInput,
+              qty: qtyInput,
               value: convertValue(valueInput),
               discount: convertValue(discountInput),
               surcharge: convertValue(surchargeInput),
