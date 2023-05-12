@@ -177,10 +177,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     fontSize: 18,
   },
+  valueDisplay: {
+    width: 100,
+    textAlign: "right",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
   rowContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 10,
+  },
+  columnContainer: {
+    flexDirection: "column",
+    marginTop: 10,
+  },
+  bigTextField: {
+    width: "100%",
   },
 });
 

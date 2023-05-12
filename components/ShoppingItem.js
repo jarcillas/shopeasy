@@ -92,7 +92,7 @@ const ShoppingItem = props => {
                   : styles.shoppingItemTextOdd,
               ]}
             >
-              {formatter.format(item.value)}
+              {formatter.format(item.value - item.discount + item.surcharge)}
             </Text>
           </>
         )}

@@ -3,6 +3,11 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import styles from "../styles";
 
+const convertValue = numString => {
+  if (!numString || numString === "") return 0;
+  return Number(numString.replace(",", ""));
+};
+
 const ItemScreen = ({ navigation, route }) => {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "decimal",
@@ -13,8 +18,13 @@ const ItemScreen = ({ navigation, route }) => {
   const { item, index, handleDeleteItem, handleUpdateItem } = route.params;
   const [titleInput, setTitleInput] = useState(item.title);
   const [valueInput, setValueInput] = useState(formatter.format(item.value));
-  const [discountInput, setDiscountInput] = useState(formatter.format(0));
-  const [surchargeInput, setSurchargeInput] = useState(formatter.format(0));
+  const [qtyInput, setQtyInput] = useState(String(item.qty));
+  const [discountInput, setDiscountInput] = useState(
+    formatter.format(item.discount),
+  );
+  const [surchargeInput, setSurchargeInput] = useState(
+    formatter.format(item.surcharge),
+  );
 
   return (
     <View style={styles.wrapper}>
@@ -29,7 +39,22 @@ const ItemScreen = ({ navigation, route }) => {
           />
         </View>
         <View style={styles.rowContainer}>
-          <Text style={styles.inputLabel}>Base Price</Text>
+          <Text style={styles.inputLabel}>Quantity</Text>
+          <TextInput
+            value={qtyInput}
+            inputMode="numeric"
+            style={styles.inputField}
+            onChangeText={text => {
+              if (text === "" || text === "0") {
+                setQtyInput("");
+              } else {
+                setQtyInput(Number(text).toFixed(0));
+              }
+            }}
+          />
+        </View>
+        <View style={styles.rowContainer}>
+          <Text style={styles.inputLabel}>Unit Price</Text>
           <TextInput
             value={valueInput}
             inputMode="decimal"
@@ -38,6 +63,12 @@ const ItemScreen = ({ navigation, route }) => {
               setValueInput(text);
             }}
           />
+        </View>
+        <View style={styles.rowContainer}>
+          <Text style={styles.inputLabel}>Subtotal</Text>
+          <Text style={styles.valueDisplay}>
+            {formatter.format(convertValue(valueInput) * Number(qtyInput))}
+          </Text>
         </View>
         <View style={styles.rowContainer}>
           <Text style={[styles.inputLabel, styles.subInputLabel]}>
@@ -67,9 +98,16 @@ const ItemScreen = ({ navigation, route }) => {
         </View>
         <View style={styles.rowContainer}>
           <Text style={styles.inputLabel}>Net Price</Text>
-          <Text style={styles.inputField}>
-            {formatter.format(valueInput - discountInput + surchargeInput)}
+          <Text style={styles.valueDisplay}>
+            {formatter.format(
+              convertValue(valueInput) * Number(qtyInput) -
+                convertValue(discountInput) +
+                convertValue(surchargeInput),
+            )}
           </Text>
+        </View>
+        <View style={styles.columnContainer}>
+          <Text style={styles.inputLabel}>Note</Text>
         </View>
       </View>
       <View style={[styles.footerContainer, styles.buttonContainer]}>
@@ -79,9 +117,9 @@ const ItemScreen = ({ navigation, route }) => {
             const newItem = {
               ...item,
               title: titleInput,
-              value: Number(valueInput),
-              discount: Number(discountInput),
-              surcharge: Number(surchargeInput),
+              value: convertValue(valueInput),
+              discount: convertValue(discountInput),
+              surcharge: convertValue(surchargeInput),
             };
             handleUpdateItem(index, newItem);
             navigation.goBack();

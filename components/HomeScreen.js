@@ -80,6 +80,8 @@ function HomeScreen({ navigation }) {
                   title: itemInput,
                   value: Number(valueInput),
                   qty: 1,
+                  discount: 0,
+                  surcharge: 0,
                 });
                 itemInputRef.current.focus();
               }
