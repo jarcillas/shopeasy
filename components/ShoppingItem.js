@@ -82,7 +82,7 @@ const ShoppingItem = props => {
                   : styles.shoppingItemTextOdd,
               ]}
             >
-              {item.title}
+              {item.title} ({item.qty})
             </Text>
             <Text
               style={[

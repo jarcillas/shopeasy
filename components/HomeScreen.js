@@ -1,9 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, View, TextInput, FlatList } from "react-native";
+import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "../styles";
 import ShoppingItem from "./ShoppingItem";
+import { customDataSet } from "../constants/prices";
+import Feather from "react-native-vector-icons/Feather";
+Feather.loadFont();
 
 const getData = async () => {
   try {
@@ -31,6 +35,7 @@ function HomeScreen({ navigation }) {
 
   const valueInputRef = useRef(null);
   const itemInputRef = useRef(null);
+  const dropdownControllerRef = useRef(null);
 
   useEffect(() => {
     getData()
@@ -84,20 +89,70 @@ function HomeScreen({ navigation }) {
     <View style={styles.wrapper}>
       <View style={styles.innerContainer}>
         <View style={styles.itemInputContainer}>
-          <TextInput
-            style={styles.itemInput}
+          <AutocompleteDropdown
             ref={itemInputRef}
-            placeholder="Enter an item..."
-            value={itemInput}
+            controller={controller => {
+              dropdownControllerRef.current = controller;
+            }}
+            textInputProps={{
+              placeholder: "Enter an item...",
+              style: {
+                flex: 1,
+                width: "100%",
+                fontSize: 20,
+                color: "#003049",
+                fontWeight: "500",
+                includeFontPadding: false,
+                paddingHorizontal: 0,
+                margin: 0,
+                textAlignVertical: "bottom",
+              },
+              returnKeyType: "next",
+              placeholderTextColor: "#006399",
+            }}
+            onSelectItem={item => {
+              console.log("selected:", item);
+              if (item) {
+                setItemInput(item.title);
+                setValueInput(item.value.toFixed(2));
+                valueInputRef.current.focus();
+              }
+            }}
+            onClear={() => {
+              setValueInput("");
+            }}
             onChangeText={text => {
               setItemInput(text);
             }}
-            returnKeyType="next"
-            onSubmitEditing={() => {
+            onSubmit={() => {
               if (itemInput !== "") {
                 valueInputRef.current.focus();
               }
             }}
+            inputHeight={28}
+            inputContainerStyle={{
+              backgroundColor: null,
+              padding: 0,
+              borderRadius: 0,
+              borderBottomColor: "#003049",
+              borderBottomWidth: 2,
+            }}
+            suggestionsListContainerStyle={{
+              opacity: 1,
+              zIndex: 10,
+            }}
+            containerStyle={{
+              flex: 1,
+              marginBottom: 0,
+            }}
+            clearOnFocus={false}
+            closeOnBlur={true}
+            closeOnSubmit={false}
+            dataSet={customDataSet}
+            ChevronIconComponent={
+              <Feather name="chevron-down" size={20} color="#003049" />
+            }
+            ClearIconComponent={<Feather name="x" size={18} color="#003049" />}
           />
           <TextInput
             style={styles.valueInput}
@@ -108,6 +163,7 @@ function HomeScreen({ navigation }) {
             onChangeText={value => {
               setValueInput(value);
             }}
+            placeholderTextColor="#006399"
             onSubmitEditing={() => {
               if (itemInput !== "" && valueInput !== "") {
                 handleSubmitItem({
@@ -117,6 +173,7 @@ function HomeScreen({ navigation }) {
                   discount: 0,
                   surcharge: 0,
                 });
+                dropdownControllerRef.current.clear();
                 itemInputRef.current.focus();
               }
             }}
