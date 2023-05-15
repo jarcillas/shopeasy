@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../styles";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+MaterialIcon.loadFont();
 
 const ShoppingItem = props => {
   const {
@@ -82,8 +84,17 @@ const ShoppingItem = props => {
                   : styles.shoppingItemTextOdd,
               ]}
             >
-              {item.title} ({item.qty})
+              {item.title} ({item.qty}){" "}
             </Text>
+            {item?.note ? (
+              <MaterialIcon
+                name="note"
+                size={20}
+                color={index % 2 ? "#003049" : "#fdf0d5"}
+              />
+            ) : (
+              ""
+            )}
             <Text
               style={[
                 styles.shoppingItemAmount,
