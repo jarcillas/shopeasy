@@ -35,6 +35,7 @@ function HomeScreen({ navigation }) {
 
   const valueInputRef = useRef(null);
   const itemInputRef = useRef(null);
+  const dropdownControllerRef = useRef(null);
 
   useEffect(() => {
     getData()
@@ -90,6 +91,9 @@ function HomeScreen({ navigation }) {
         <View style={styles.itemInputContainer}>
           <AutocompleteDropdown
             ref={itemInputRef}
+            controller={controller => {
+              dropdownControllerRef.current = controller;
+            }}
             textInputProps={{
               placeholder: "Enter an item...",
               style: {
@@ -169,6 +173,7 @@ function HomeScreen({ navigation }) {
                   discount: 0,
                   surcharge: 0,
                 });
+                dropdownControllerRef.current.clear();
                 itemInputRef.current.focus();
               }
             }}
